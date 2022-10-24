@@ -101,7 +101,7 @@ function CarSection() {
                                 ) : (
                                     <h2 className="text-center">Mobil Tidak Ditemukan</h2>
                                 )
-                        ) : (<h2 className="d-flex justify-content-center m-5">Loading...</h2>) 
+                        ) : (<h2 className="d-flex justify-content-center">Loading...</h2>) 
                         }
                     </div>
                 </div>
