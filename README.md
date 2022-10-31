@@ -1,3 +1,3 @@
 # Binar Car Rental
-Platinum Challenge Binar Academy
-demo: bcr.ariqkharism.my.id
+## Challenge di kelas platinum Binar Academy
+## demo: bcr.ariqkharisma.my.id
