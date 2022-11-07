@@ -1,12 +1,12 @@
 // path: ./config/env/production/database.js
 
-const parse = require("pg-connection-string").parse;
+import { parse } from "pg-connection-string";
 
 const { host, port, database, user, password } = parse(
   process.env.DATABASE_URL
 );
 
-module.exports = ({ env }) => ({
+export default ({ env }) => ({
   connection: {  
     client: 'postgres',
     connection: {
