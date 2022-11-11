@@ -87,7 +87,7 @@ function CarSection() {
                                         return (
                                             <div key={index} className="col-lg-4 col-md-6">                   
                                                 <div className="card p-3 d-flex flex-column justify-content-between" style={{height: '100%'}}>
-                                                    {car.attributes.image? (<img src={car.attributes.image} alt="car" style={{width: '100%', height: '225px', objectFit:'cover'}} /> ) : (<img src="/Assets/dummy.png" alt="car" style={{width: '100%', height: '225px', objectFit:'cover'}}/> )}                                             
+                                                    {car.attributes.image.data? (<img src={car.attributes.image.data.attributes.formats.small.url} alt="car" style={{width: '100%', height: '225px', objectFit:'cover'}} /> ) : (<img src="/Assets/dummy.png" alt="car" style={{width: '100%', height: '225px', objectFit:'cover'}}/> )}                                             
                                                     <div>
                                                         {car.attributes.name? (<p className="mt-3 mb-1">{car.attributes.name}</p>) : (<p className="mt-3 mb-1">Tidak ada nama</p>)}
                                                         {car.attributes.price? (<h5>Rp {car.attributes.price.toLocaleString('en-US')}/ Hari</h5>) : (<h5>Tidak Ada Harga</h5>)}
