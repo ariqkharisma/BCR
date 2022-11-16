@@ -1,10 +1,11 @@
 import React, {Fragment, useEffect, useState} from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import SearchBar from "../SearchBar/SearchBar";
 import { DateRange } from 'react-date-range';
 import { useDispatch, useSelector } from "react-redux";
 import { carsGetById } from "../../Feature/Cars/cars-slice";
 import { orderPost } from "../../Feature/Order/order-slice";
+import SearchBar from "../SearchBar/SearchBar";
+import './CarDetailSection.css';
 
 
 
@@ -33,24 +34,23 @@ function CarDetailSection() {
     ]);
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
-    const [dateDisplay, setDateDisplay] = useState('d-none');
-    const [dateValue, setDateValue] = useState('test');
+    const [dateDisplay, setDateDisplay] = useState('d-none')
 
     let { id } = useParams();
 
-    const handleSubmit = async (values) => {
+    const handleSubmit = async () => {
         if (!user) {
             alert('Kamu belum login, silahkan login terlebih dahulu untuk melanjutkan pembayaran');
             navigate('/login');
         }
-        values = {
+        const values = {
             start_rent_at: date[0].startDate,
             finish_rent_at: date[0].endDate,
-            status: false,
-            car: car && car.id,
-            user: user && user.user.id,
             car_id: car && car.id,
             user_id: user && user.user.id,
+            status: 'unpaid',
+            car: car && car.id,
+            user: user && user.user.id,
         }
         const { payload } = await dispatch(orderPost(values));
         navigate(`/order/${payload.data.id}`);
@@ -87,7 +87,7 @@ function CarDetailSection() {
     },[])
 
    
-    return(
+    return (
         <Fragment>
             <SearchBar carName={carName} setCarName={setCarName} carCategory={carCategory} setCarCategory={setCarCategory} carPrice={carPrice} setCarPrice={setCarPrice} carStatus={carStatus} setCarStatus={setCarStatus} setSearchParams={setSearchParams}/>
             { loading === false ? (
@@ -98,7 +98,7 @@ function CarDetailSection() {
                             <div className="col-lg-4">
                                 <div className="row card p-3">
                                     <div className="py-2">
-                                        {car.attributes.image? (<img src={car.attributes.image} alt="car" style={{width: '100%', height: '100%'}} /> ) : (<img src="/Assets/dummy.png" alt="car" style={{width: '100%'}} /> )} 
+                                        {car.attributes.image.data? (<img src={car.attributes.image.data.attributes.formats.small.url} alt="car" style={{width: '100%', height: '100%'}} /> ) : (<img src="/Assets/dummy.png" alt="car" style={{width: '100%'}} /> )} 
                                     </div>
                                     <div className="d-flex flex-column">
                                         {car.attributes.name? (<h4>{car.attributes.name}</h4>) : <h4>Tidak ada nama</h4> }

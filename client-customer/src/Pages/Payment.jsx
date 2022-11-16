@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Footer from '../Component/Footer/Footer'
 import Header from '../Component/Header/Header'
 import OrderDetailBar from '../Component/OrderDetailBar/OrderDetailBar'
@@ -15,6 +15,7 @@ import NotFound from './NotFound'
 
 function Payment() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const order = useSelector(state => {return state.order.order});
   const car = useSelector(state => {return state.cars.car});
   const [loading, setLoading] = useState(true);
@@ -42,7 +43,7 @@ function Payment() {
   const getData = async() => {
     try {
       const { payload } = await dispatch(orderGetById(id));
-      await dispatch(carsGetById(payload.data.attributes.car_id));
+      await dispatch(carsGetById(payload.data.car_id));
       setLoading(false)
     } catch (error) {
       setLoading(false);
@@ -51,7 +52,8 @@ function Payment() {
 
   useEffect(() => {
     getData();
-  }, []);
+    order && order.status === 'paid' && navigate(`/etiket/${order.id}`)
+  }, [order]);
 
   return (
     page == 'payment method' ? (

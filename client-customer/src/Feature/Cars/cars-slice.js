@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { setLoading } from '../Auth/message-slice'
 import carsAPI from "./cars-api";
 
 
@@ -26,6 +25,17 @@ export const carsGetById = createAsyncThunk('cars/getById',
     }
 )
 
+export const carsFilter = createAsyncThunk('cars/filter',
+    async ({name, category, price, isRented}) => {
+        try {
+            const { data } = await carsAPI.filterCar({name, category, price, isRented});
+            return data;
+        } catch (error) {
+            console.log(error)
+        } 
+    }
+)
+
 const initialState = {cars: [], car: null};
 
 const carsSlice = createSlice({
@@ -36,6 +46,12 @@ const carsSlice = createSlice({
             state.cars = action.payload.data;
         },
         [carsGetAll.rejected] : (state, action) => {
+            state.cars = [];
+        },
+        [carsFilter.fulfilled] : (state, action) => {
+            state.cars = action.payload.data;
+        },
+        [carsFilter.rejected] : (state, action) => {
             state.cars = [];
         },
         [carsGetById.fulfilled] : (state, action) => {

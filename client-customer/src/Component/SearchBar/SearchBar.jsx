@@ -1,5 +1,4 @@
-import React from "react";
-import axios from "axios";
+import { React, useState } from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
 
 
@@ -9,18 +8,20 @@ const useNavigateSearch = () => {
 }
 
 
-function SearchBar({setCars, carName, setCarName, carCategory, setCarCategory, carPrice, setCarPrice, carStatus, setCarStatus, setSearchParams}) { 
+function SearchBar() {
+    const [carName, setCarName] = useState('');
+    const [carCategory, setCarCategory] = useState('');
+    const [carPrice, setCarPrice] = useState(0);
+    const [isRented, setIsRented] = useState('');
+    
     const navigateSearch = useNavigateSearch();
-    const goToSearch = () => navigateSearch('/search', {name: `${carName}`, category:`${carCategory}`, isRented:`${carStatus}`});
+    const goToSearch = () => navigateSearch('/search', {name: `${carName}`, category:`${carCategory}`, price: `${carPrice}`, isRented:`${isRented}`});
     
     const handleOnClick = async (e) => {
         e.preventDefault();
-        if (carName && carCategory && carPrice && carStatus) {
-            const { data } = await axios.get(`https://bootcamp-rent-cars.herokuapp.com/customer/v2/car?name=${carName}&category=${carCategory}&isRented=${carStatus}&page=1&pageSize=10`);
-            setCars(data.cars);
-            console.log(data.cars);
-            // goToSearch();
-        } else alert('Semua Kolom Pencarian Harus Diisi');
+        if (carName && carCategory && carPrice && isRented) {
+            goToSearch();
+        } else alert('Semua Kolom Pencarian Harus Diisi')
     }
 
     return (
@@ -32,7 +33,7 @@ function SearchBar({setCars, carName, setCarName, carCategory, setCarCategory, c
                         <div className="row">
                             <div className="col-lg-3 d-flex flex-column justify-content-between">
                                 <label htmlFor="name">Nama Mobil</label>
-                                <input placeholder="Masukkan Nama Mobil" required className="p-2" type="text" id="name" name="name" style={{height: '35px'}} onChange={(e) => {setCarName(e.target.value); setSearchParams('')}}/>
+                                <input placeholder="Masukkan Nama Mobil" required className="p-2" type="text" id="name" name="name" style={{height: '35px'}} onChange={(e) => {setCarName(e.target.value)}}/>
                             </div>
 
                             <div className="col-lg-3 d-flex flex-column justify-content-between">
@@ -41,23 +42,19 @@ function SearchBar({setCars, carName, setCarName, carCategory, setCarCategory, c
                                     <option value="">Pilih Kapasitas Mobil</option>
                                     <option value="small"> Small</option>
                                     <option value="medium"> Medium</option>
-                                    <option value="large"> Large</option>
+                                    <option value="big"> Large</option>
                                 </select>
                             </div>
 
                             <div className="col-lg-3 d-flex flex-column justify-content-between">
                                 <label htmlFor="price">Harga</label>
-                                <select onChange={e => setCarPrice(e.target.value)} required className="p-2" name="price" id="price" style={{height: '35px'}}>
-                                    <option value="">Pilih Harga Sewa per Hari</option>
-                                    <option value="lt400"> &#60; Rp. 400.000</option>
-                                    <option value="400-600"> Rp. 400.000 - Rp.600.000</option>
-                                    <option value="gt600"> &#62; Rp. 600.000 </option>
-                                </select>
+                                <input onChange={e => setCarPrice(e.target.value)} required className="p-2" name="price" id="price" style={{height: '35px'}} />
+                        
                             </div>
 
                             <div className="col-lg-2 d-flex flex-column justify-content-between">
                                 <label htmlFor="status">Status</label>
-                                <select onChange={e => setCarStatus(e.target.value)}required className="p-2" name="status" id="status" style={{height: '35px'}}>
+                                <select onChange={e => setIsRented(e.target.value)} required className="p-2" name="status" id="status" style={{height: '35px'}}>
                                     <option value="">Pilih Status</option>
                                     <option value="true">Sedang Disewa</option>
                                     <option value="false">Tersedia</option>

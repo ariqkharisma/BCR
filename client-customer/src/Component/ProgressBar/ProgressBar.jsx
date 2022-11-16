@@ -9,7 +9,7 @@ function ProgressBar({page, setPage, car}) {
         <section id='progressBar' style={{position: 'absolute', top: '140px', right: '0', left: '0', marginBottom:'106px'}}>
             <div className="container d-flex justify-content-between" style={{height: '44px'}}>
                 <div className='d-flex'>
-                    <a onClick={() => {page === 'transfer' ? setPage('payment method') : page === 'payment method' ? navigate(`/car/${car.id}`) : page === 'etiket' && navigate(`/order/${id}`)}} className='h-100 text-decoration-none text-dark' style={{width: '44px', fontSize: '18px', cursor: 'pointer'}}><i className="fa-solid fa-arrow-left mr-3 d-flex align-items-center h-100 w-100"></i></a>
+                    <a onClick={() => {page === 'transfer' ? setPage('payment method') : page === 'payment method' ? navigate(`/order`) : page === 'etiket' && navigate(`/order/${id}`)}} className='h-100 text-decoration-none text-dark' style={{width: '44px', fontSize: '18px', cursor: 'pointer'}}><i className="fa-solid fa-arrow-left mr-3 d-flex align-items-center h-100 w-100"></i></a>
                     <p className='d-none d-sm-flex align-items-center h-100'>Pembayaran</p>
                 </div>
                 <div className='d-flex justify-content-evenly align-items-center'>

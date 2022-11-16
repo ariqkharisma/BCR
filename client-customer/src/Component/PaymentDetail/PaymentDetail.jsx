@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { carsGetById } from '../../Feature/Cars/cars-slice';
 
 function PaymentDetail({order, car, bank, setBank, setPage, getNumberOfDays}) {
-    const diffOfDays = getNumberOfDays(order.attributes.start_rent_at, order.attributes.finish_rent_at);
+    const diffOfDays = getNumberOfDays(order.start_rent_at, order.finish_rent_at);
     const totalPrice = (diffOfDays * car.attributes.price).toLocaleString('en-US');
 
     return (

@@ -1,4 +1,5 @@
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/bootstrap/dist/js/bootstrap'
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import './App.css';
@@ -12,6 +13,7 @@ import Login from './Pages/Login';
 import Signup from './Pages/Signup';
 import Payment from './Pages/Payment';
 import Etiket from './Pages/Etiket';
+import MyOrder from './Pages/MyOrder';
 
 
 function App() {
@@ -28,6 +30,7 @@ function App() {
           <Route path='login' element={<Login />} />
           <Route path='signup' element={<Signup />} />
           <Route path='etiket/:id' element={<Etiket />} />
+          <Route path='order' element={<MyOrder />} />
           <Route path='order/:id' element={<Payment />} />
         </Route>
         <Route path='*' element={<NotFound />} />

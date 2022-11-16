@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import { carsGetAll } from "../../Feature/Cars/cars-slice";
+import { carsFilter, carsGetAll } from "../../Feature/Cars/cars-slice";
 import SearchBar from "../SearchBar/SearchBar";
 
 
@@ -11,68 +11,34 @@ function CarSection() {
     const dispatch = useDispatch();
     const { cars } = useSelector(state => {return state.cars});
     const [loading, setLoading] = useState(true);
+       
+    const [searchParams, setSearchParams] = useSearchParams();
+    const carNameParams = searchParams.get('name');
+    const categoryParams = searchParams.get('category');
+    const priceParams = searchParams.get('price');
+    const statusParams = searchParams.get('isRented')
     
-    // const [cars, setCars] = useState([]);
-    // const [loading, setLoading] = useState(false);
+    const filterCars = async() => {
+        const params = {
+            name: carNameParams, 
+            category: categoryParams, 
+            price: priceParams, 
+            isRented: statusParams,
+        }
+        await dispatch(carsFilter(params));
+    }
 
-    // const [carName, setCarName] = useState('');
-    // const [carCategory, setCarCategory] = useState('');
-    // const [carPrice, setCarPrice] = useState('');
-    // const [carStatus, setCarStatus] = useState('');
-    
-    // const [searchParams, setSearchParams] = useSearchParams();
-    // const carNameParams = searchParams.get('name');
-    // const categoryParams = searchParams.get('category');
-    // const priceParams = searchParams.get('price');
-    // const statusParams = searchParams.get('isRented')
-    
-
-    // const handleLiveSearch = (data) => {
-    //     // livesearch cuma bisa pake nama mobil, parameter lainnya belum bisa.
-    //     const filteredData = data.filter((car) => {
-    //         if (car.name && car.name.toLowerCase().includes(carName.toLowerCase())) {
-    //             return true;
-    //         }
-    //     })
-    //     setCars(filteredData);
-    // }
-
-    // const handleSearchWithParams = (data) => {
-    //     const checkPrice = (price) => {
-    //         if (price < 400000 && priceParams == 'lt400') {
-    //             return true;
-    //         } else if (price >= 400000 && price <= 600000 && priceParams == '400-600') {
-    //             return true;
-    //         } else if (price > 600000 && priceParams == 'gt600') {
-    //             return true;
-    //         } else false;
-    //     } 
-    
-    //     const checkStatus = (status) => {
-    //         if (status == false && statusParams == 'tersedia') {
-    //             return true;
-    //         } if (status == true && statusParams == 'disewa') {
-    //             return true;
-    //         } else false;
-    //     }
-
-    //     const filteredData = data.filter((car) => {
-    //         if (car.name) {
-    //             return car.name.toLowerCase() == carNameParams.toLowerCase() && car.category == categoryParams && checkPrice(car.price) && checkStatus(car.status);
-    //         }
-    //     })
-
-    //     setCars(filteredData);
-    // }
-    
     const getAllCars = async() => {
-        await dispatch(carsGetAll());
-        setLoading(false);
+        if (carNameParams || categoryParams || priceParams || statusParams) {
+            filterCars();
+        } else await dispatch(carsGetAll());
     }
 
     useEffect(() => {
+        setLoading(true);
         getAllCars();
-    },[/*carName, carNameParams, categoryParams, statusParams, priceParams*/])
+        setLoading(false);
+    },[carNameParams])
 
     
     return (

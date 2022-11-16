@@ -21,12 +21,12 @@ function OrderDetailBar({order, car}) {
 
                             <div className="col-md-3 col-6 d-flex flex-column">
                                 <p className='m-0'>Mulai Sewa</p>
-                                <p style={{fontWeight: 400}} className='m-0'>{order && order.attributes && order.attributes.start_rent_at}</p>
+                                <p style={{fontWeight: 400}} className='m-0'>{order && order.start_rent_at}</p>
                             </div>
 
                             <div className="col-md-3 col-6 d-flex flex-column">
                                 <p className='m-0'>Selesai Sewa</p>
-                                <p style={{fontWeight: 400}} className='m-0'>{order && order.attributes && order.attributes.finish_rent_at}</p>
+                                <p style={{fontWeight: 400}} className='m-0'>{order && order.finish_rent_at}</p>
                             </div>
                         </div>                 
                     </div>

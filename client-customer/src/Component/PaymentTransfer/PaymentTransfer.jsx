@@ -1,16 +1,19 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getAuthHeader } from '../../Feature/Auth/accessTokenHeader';
+import { orderUpdate } from '../../Feature/Order/order-slice';
 
 function PaymentTransfer({bank, order, car, getNumberOfDays}) {
     const [clipboard, setClipBoard] = useState();
     const [paymentMethod, setPaymentMethod] = useState('ATM BCA');
     const [uploadPaymentProof, setUploadPaymentProof] = useState(false);
     const [uploadImage, setUploadImage] = useState();
-    const diffOfDays = getNumberOfDays(order.attributes.start_rent_at, order.attributes.finish_rent_at);
+    const diffOfDays = getNumberOfDays(order.start_rent_at, order.finish_rent_at);
     const totalPrice = (diffOfDays * car.attributes.price).toLocaleString('en-US');
     const navigate = useNavigate();
-
 
     return (
         <section className="mb-5" id="paymentDetail">
@@ -122,11 +125,14 @@ function PaymentTransfer({bank, order, car, getNumberOfDays}) {
                                     <p>Konfirmasi Pembayaran</p>
                                     <p className='fw-normal'>Terima kasih telah melakukan konfirmasi pembayaran. Pembayaranmu akan segera kami cek tunggu kurang lebih 10 menit untuk mendapatkan konfirmasi.</p>
                                     <form>
-                                        <input type={'file'} onChange={(e) => {setUploadImage(e.target.value)}} id="fileUpload" accept=".jpg" />
-                            
+                                        <input type={'file'} onChange={(e) => {setUploadImage(e.target.files[0])}} id="fileUpload" accept="" />
                                     </form>
                                     <div>
-                                        <button className='btn btn-success w-100 mt-3' onClick={() => navigate(`/etiket/${order.id}`)}>Upload</button>
+                                        { uploadImage ?
+                                            <button className='btn btn-success w-100 mt-3' onClick={() => navigate(`/etiket/${order.id}`)}>Upload</button> :
+                                            <button className='btn btn-success w-100 mt-3' disabled>Upload</button>
+                                        }
+                                        
                                     </div>
                                 </div>
                             )

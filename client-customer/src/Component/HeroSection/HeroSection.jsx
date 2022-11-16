@@ -11,7 +11,7 @@ function HeroSection({isButtonShow}) {
     const [sidebar, setSidebar] = useState('collapse');
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {isLoggedIn} = useSelector(state => {return state.auth});
+    const auth = useSelector(state => {return state.auth});
 
     const handleLogout = () => {
         dispatch(authLogout());
@@ -44,9 +44,17 @@ function HeroSection({isButtonShow}) {
                                 <a className="nav-link" href="/#faq">FAQ</a>
                             </li>
                             <li className="nav-item mr-3">
-                                {isLoggedIn? 
-                                     <button className="nav-link btn bg-success text-light d-flex justify-content-center px-3" onClick={handleLogout}>Logout</button> :
-                                     <button className="nav-link btn bg-success text-light d-flex justify-content-center px-3" onClick={() => navigate('/signup')}>Register</button>
+                                {auth.isLoggedIn? 
+                                    <div className="btn-group d-flex flex-column">
+                                        <button type="button" className="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i className="fa-regular fa-user mr-2"></i>{auth.user.user.username}
+                                        </button>
+                                        <ul className="dropdown-menu">
+                                        <li><a className="dropdown-item" href="/order">My Order</a></li>
+                                        <li><a className="dropdown-item" onClick={handleLogout} href="">Logout</a></li>
+                                        </ul>
+                                    </div> :
+                                    <button className="nav-link btn bg-success text-light d-flex justify-content-center px-3" onClick={() => navigate('/signup')}>Register</button>
                                 }
                             </li>
                         </ul>
