@@ -48,8 +48,8 @@ function Footer() {
                         
                     </div>
                     <div className="col-lg-3 mb-3">
-                        <p className="fw-bold">Copyright Binar 2022</p>
-                        <a className="navbar-brand px-3 text-light p-1" href="/">BinarRent</a>
+                        <p className="fw-bold">Copyright Binar Car Rental 2022</p>
+                        <a className="navbar-brand px-4 text-light p-1" href="/">BCR</a>
                     </div>
                 </div>
             </div>

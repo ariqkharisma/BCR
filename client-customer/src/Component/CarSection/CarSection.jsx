@@ -29,16 +29,16 @@ function CarSection() {
     }
 
     const getAllCars = async() => {
+        setLoading(true);
         if (carNameParams || categoryParams || priceParams || statusParams) {
-            filterCars();
+            await filterCars();
         } else await dispatch(carsGetAll());
+        setLoading(false);
     }
 
     useEffect(() => {
-        setLoading(true);
         getAllCars();
-        setLoading(false);
-    },[carNameParams])
+    },[carNameParams, categoryParams, priceParams, statusParams])
 
     
     return (
@@ -47,7 +47,7 @@ function CarSection() {
             <section id="cars">
                 <div className="container">
                     <div className="row">
-                        {   loading === false? (
+                        {   !loading? (
                                 cars.length? (
                                     cars.map((car, index) => {
                                         return (

@@ -23,7 +23,7 @@ function HeroSection({isButtonShow}) {
         <section id="hero" style={{minHeight: '500px'}}>
             <nav className="navbar navbar-expand-lg navbar-light">
                 <div className="container mt-3">
-                    <a className="navbar-brand text-light px-3 ml-3" href="/">BinarRent</a>
+                    <a className="navbar-brand text-light px-4 ml-3" href="/">BCR</a>
                     <button onClick={() => setSidebar('show')} className="navbar-toggler" type="button" aria-label='open sidebar'>
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -65,7 +65,7 @@ function HeroSection({isButtonShow}) {
             <div className="container mt-5">
                 <div className="row">
                     <div className="col-lg-6 d-flex flex-column justify-content-center">
-                        <h1>Sewa & Rental Mobil Terbaik di kawasan (Lokasimu)</h1>
+                        <h1>Sewa & Rental Mobil Terbaik di kawasan Jabodetabek</h1>
                         <p className="mt-4 mr-4">Selamat datang di Binar Car Rental. Kami menyediakan mobil kualitas terbaik dengan harga terjangkau. Selalu siap melayani kebutuhanmu untuk sewa mobil selama 24 jam.</p>
                         <a href="/car" className="text-reset text-decoration-none">
                             {

@@ -20,7 +20,7 @@ function Header(props) {
         <section id="hero" style={{minHeight: `${props.height}`}}>
             <nav className="navbar navbar-expand-lg navbar-light">
                 <div className="container mt-3">
-                    <a className="navbar-brand text-light px-3 ml-3" href="/">BinarRent</a>
+                    <a className="navbar-brand text-light px-4 ml-3" href="/">BCR</a>
                     <button onClick={() => setSidebar('show')} className="navbar-toggler" type="button"  aria-label='open sidebar'>
                         <span className="navbar-toggler-icon"></span>
                     </button>

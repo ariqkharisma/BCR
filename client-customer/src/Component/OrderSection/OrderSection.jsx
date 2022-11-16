@@ -25,7 +25,7 @@ function OrderSection() {
     },[])
 
     return (
-        <section id='orderSection'>
+        <section id='orderSection' className='mb-5'>
             <div className='container'>
                 <h1 style={{position:'absolute', top: '140px'}}>My Order</h1>
                 <div className='row'>

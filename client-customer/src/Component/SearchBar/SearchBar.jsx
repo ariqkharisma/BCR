@@ -47,7 +47,7 @@ function SearchBar() {
                             </div>
 
                             <div className="col-lg-3 d-flex flex-column justify-content-between">
-                                <label htmlFor="price">Harga</label>
+                                <label htmlFor="price">Harga Maksimum</label>
                                 <input onChange={e => setCarPrice(e.target.value)} required className="p-2" name="price" id="price" style={{height: '35px'}} />
                         
                             </div>

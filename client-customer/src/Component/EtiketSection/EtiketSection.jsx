@@ -16,7 +16,7 @@ function EtiketSection() {
     }, [])
   
   return (
-    <section id='etiketSection'>
+    <section id='etiketSection' className='mb-5' >
         <div className="container">
             { order && order.status === 'paid'? 
             <>
@@ -58,7 +58,11 @@ function EtiketSection() {
                     </div>
                 </div>
             </div>
-            </> : <h1>menunggu konfirmasi</h1>
+            </> : 
+            <section id='etiketSection'>
+                <h3 className='d-flex justify-content-center align-items-center py-3 text-center'>Menunggu Konfirmasi Admin</h3>
+                <p className='mb-0 d-flex justify-content-center align-items-center text-center'>Etiket akan muncul pada halaman ini ketika pembayaran sudah dikonfirmasi admin, cek secara berkala halaman ini untuk mendapatkan update terbaru terkait etiketmu.</p>
+            </section>
             }
         </div>
     </section>
