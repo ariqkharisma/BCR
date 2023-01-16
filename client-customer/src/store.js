@@ -23,7 +23,7 @@ export default configureStore({
         ignoredPaths: ['items.dates'],
       },
     }),
-    devTools : true,
+    devTools : false,
 })
 
 

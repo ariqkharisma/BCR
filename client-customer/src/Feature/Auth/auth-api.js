@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const API_URL = 'https://binar-rental.herokuapp.com/api/';
+const API_URL = 'https://bcrserver-production.up.railway.app/api/';
 
 
 const register = ({username, email, password}) => {

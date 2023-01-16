@@ -26,7 +26,7 @@ export const carsGetById = createAsyncThunk('cars/getById',
 )
 
 export const carsFilter = createAsyncThunk('cars/filter',
-    async ({name, category, price, isRented}) => {
+    async ({ name, category, price, isRented }) => {
         try {
             const { data } = await carsAPI.filterCar({name, category, price, isRented});
             return data;

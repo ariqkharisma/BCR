@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = 'https://binar-rental.herokuapp.com/api/';
+const API_URL = 'https://bcrserver-production.up.railway.app/api/';
 
 const getCars = () => {
     return axios.get(`${API_URL}cars?populate=image`)

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getAuthHeader } from "../Auth/accessTokenHeader";
 
-const API_URL = 'https://binar-rental.herokuapp.com/api/';
+const API_URL = 'https://bcrserver-production.up.railway.app/api/';
 
 const getAllOrder = () => {
     return axios.get(`${API_URL}orders`, {
