@@ -30,10 +30,17 @@ function CarSection() {
 
     const getAllCars = async() => {
         setLoading(true);
-        if (carNameParams || categoryParams || priceParams || statusParams) {
-            await filterCars();
-        } else await dispatch(carsGetAll());
-        setLoading(false);
+        try {
+            if (carNameParams || categoryParams || priceParams || statusParams) {
+                await filterCars();
+            } else {
+                await dispatch(carsGetAll())
+            };
+            setLoading(false);
+        } catch (error) {
+            console.log(error);
+            setLoading(false)
+        }
     }
 
     useEffect(() => {
